@@ -11,7 +11,7 @@ public class BeispielCode {
 
   public static void main(String[] args) {
     // Inhalt der build.gradle Datei ausgeben
-    Path p = Path.of("build.gradle");
+    Path p = Path.of("odyssey.txt");
     try {
       Stream<String> lineStream = Files.lines(p);
       lineStream.forEach(System.out::println);
