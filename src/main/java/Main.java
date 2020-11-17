@@ -72,12 +72,23 @@ public class Main {
 		System.out.println("avg: " + avg.getAsDouble());
 	}
 
+	public static void histogramm(List<Eintrag> eintraege){
+		Map<Long, Long> histo = eintraege.stream().collect(Collectors.groupingBy(e -> e.zeit / 100, Collectors.counting()));
+		System.out.println(histo);
+	}
+
+	public static void avgTag(){
+
+	}
+
+
 	public static void main(String[] args) {
-		long start = System.currentTimeMillis();
+		//long start = System.currentTimeMillis();
 		List<Eintrag> eintraege = readFile("odyssey.txt");
-		long dauer = System.currentTimeMillis() - start;
-		System.out.println("Dauer: " + dauer);
-		minMaxAvgTime(eintraege);
+		//long dauer = System.currentTimeMillis() - start;
+		//System.out.println("Dauer: " + dauer);
+		//minMaxAvgTime(eintraege);
+		histogramm(eintraege);
 	}
 
 
