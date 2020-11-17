@@ -44,7 +44,6 @@ public class Main {
 					.parallel()
 					.map(l -> new Eintrag(l.get(0), l.get(1)))
 					.collect(Collectors.toList());
-			System.out.println(eintraege);
 
 			return eintraege;
 		} catch (IOException e) {
@@ -53,12 +52,32 @@ public class Main {
 		return Collections.emptyList();
 	}
 
+	public static void minMaxAvgTime(List<Eintrag> eintraege)
+	{
+		Optional<Long> min = eintraege.stream()
+				.map(e -> e.zeit)
+				.min(Long::compare);
+
+		Optional<Long> max = eintraege.stream()
+				.map(e -> e.zeit)
+				.max(Long::compare);
+
+		OptionalDouble avg = eintraege.stream()
+				.map(e -> e.zeit)
+				.mapToDouble(l -> (double)l)
+				.average();
+
+		System.out.println("min: " + min.get());
+		System.out.println("max: " + max.get());
+		System.out.println("avg: " + avg.getAsDouble());
+	}
 
 	public static void main(String[] args) {
 		long start = System.currentTimeMillis();
-		readFile("odyssey.txt");
+		List<Eintrag> eintraege = readFile("odyssey.txt");
 		long dauer = System.currentTimeMillis() - start;
 		System.out.println("Dauer: " + dauer);
+		minMaxAvgTime(eintraege);
 	}
 
 
