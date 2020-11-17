@@ -19,6 +19,14 @@ public class Main {
 					.ofInstant(Instant.ofEpochSecond(Long.parseLong(zeitstempel)), TimeZone.getTimeZone("UTC").toZoneId());
 			this.zeit = Long.parseLong(zeit);
 		}
+
+		@Override
+		public String toString() {
+			return "Eintrag{" +
+					"zeitstempel=" + zeitstempel +
+					", zeit=" + zeit +
+					'}';
+		}
 	}
 
 
@@ -33,8 +41,10 @@ public class Main {
 
 			List<Eintrag> eintraege = values
 					.stream()
+					.parallel()
 					.map(l -> new Eintrag(l.get(0), l.get(1)))
 					.collect(Collectors.toList());
+			System.out.println(eintraege);
 
 			return eintraege;
 		} catch (IOException e) {
